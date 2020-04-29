@@ -1,5 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Recipe } from './recipe.model';
+import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 @Injectable()
 export class RecipeService {
@@ -8,13 +10,29 @@ export class RecipeService {
     recipeSelected = new EventEmitter<Recipe>();
     
     recipes: Recipe[] = [
-    new Recipe('A Test Recipe', 'This is simply a test', 'https://d1doqjmisr497k.cloudfront.net/-/media/mccormick-us/recipes/mccormick/q/800/quick_and_easy_french_toast_new_800x800.jpg?vd=20191111T152624Z&hash=F75037210F12A55466D9F0B7EDCA742701ABF16B'),
-    new Recipe('Another Test Recipe', 'This is simply a test', 'https://lilluna.com/wp-content/uploads/2017/10/spanish-rice-resize-6.jpg')
-  ];
+            new Recipe(
+              'Tasty Schnitzel',
+              'A super-tasty Schnitzel - just awesome!',
+              'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
+              [
+                new Ingredient('Meat', 1),
+                new Ingredient('French Fries', 20)
+              ]),
+            new Recipe('Big Fat Burger',
+              'Mac Chicken Woo',
+              'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
+              [
+                new Ingredient('Buns', 2),
+                new Ingredient('Meat', 1)
+              ])
+          ];
+    constructor(private slService: ShoppingListService) { }
+    getRecipes(){
+      return [...this.recipes];
+    }
 
-  getRecipes(){
-    return [...this.recipes];
-  }
-  constructor() { }
+    addIngredientToShoppingList(ingredients: Ingredient[]){
+        this.slService.addIngredients(ingredients);
+    }
 
 }
