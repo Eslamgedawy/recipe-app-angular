@@ -24,6 +24,7 @@ export class ShoppingListService {
 
   
   addIngredients(ingredients: Ingredient[]){
+    // split the array elements
     this.ingredients.push(...ingredients);
   }
 
