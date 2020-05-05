@@ -11,6 +11,7 @@ export class RecipeService {
     
     recipes: Recipe[] = [
             new Recipe(
+               1,
               'Tasty Schnitzel',
               'A super-tasty Schnitzel - just awesome!',
               'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
@@ -18,7 +19,9 @@ export class RecipeService {
                 new Ingredient('Meat', 1),
                 new Ingredient('French Fries', 20)
               ]),
-            new Recipe('Big Fat Burger',
+            new Recipe(
+               2,
+              'Big Fat Burger',
               'Mac Chicken Woo',
               'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
               [
@@ -30,6 +33,16 @@ export class RecipeService {
     getRecipes(){
       return [...this.recipes];
     }
+
+    // get single recipe
+     getRecipe(id: number){
+      const recipe = this.recipes.find(
+         (r) =>{
+           return r.id === id
+         }
+       )
+       return recipe;
+     }
 
     addIngredientToShoppingList(ingredients: Ingredient[]){
         this.slService.addIngredients(ingredients);
