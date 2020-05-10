@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
 import { Recipe } from '../recipes/recipe.model';
@@ -11,6 +11,7 @@ import { Recipe } from '../recipes/recipe.model';
 export class ShoppingListComponent implements OnInit {
 
   ingredients: Ingredient[] = [];
+  itemSelected = new EventEmitter<number>();
   constructor(private shopServs: ShoppingListService) { }
 
   ngOnInit() {
@@ -22,6 +23,10 @@ export class ShoppingListComponent implements OnInit {
         this.ingredients = ingredients
       }
     )
+  }
+
+  onEditItem(id: number){
+    this.shopServs.startEditing.next(id);
   }
 
   // onIngredientAdded(ingredient: Ingredient) {
