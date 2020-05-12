@@ -1,55 +1,49 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-  <div class="col-xs-12">
-  <div class="form-group">
-    <label for="Name">Name</label>
-    <input 
-       type="text" 
-       class="form-control"
-       formControlName="name" />
-  </div>
-  <div class="form-group">
-    <label for="imgPath">Image Path</label>
-    <input 
-       type="text" 
-       class="form-control"
-       formControlName="imgPath" />
-  </div>
-  <div class="form-group">
-    <label for="desc">Desctiption</label>
-    <textarea 
-       class="form-control"
-       formControlName="desc"  cols="10" rows="10"></textarea>
-  </div>
-  <div  formArrayName = "ingredients">
-    <div 
-    class="row" 
-    [formGroupName]="i" 
-    *ngFor="let ingred of myForm.get('ingredients').controls;let i =index;">
-        <div class="col-xs-8">
-        <input 
-              type="text"
-              class="form-control" 
-              formControlName="ingredientName"
-             />
-        </div>
-        <div class="col-xs-3">
-          <input 
-              type="number" 
-              class="form-control"
-              formControlName="ingredientAmount"
-              />
-        </div>
-        <div class="col-xs-1">
-          <button 
-            type="button" 
-            class="btn btn-danger">X</button>
+    <div class="col-xs-12">
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-danger">Cancel</button>
         </div>
     </div>
-  </div>
-  <br>
-  <div class="form-group">
-    <button type="submit" class="btn btn-success">Save</button>
-    <button type="button" class="btn btn-danger">Cancel</button>
-  </div>
-</div>
+
+    <div class="col-xs-12">
+
+        <div class="form-group">
+          <label for="Name">Name</label>
+          <input 
+            type="text" 
+            class="form-control"
+            formControlName="name" />
+        </div>
+        <div class="form-group">
+          <label for="imgPath">Image Path</label>
+          <input 
+            type="text" 
+            class="form-control"
+            formControlName="imgPath" />
+        </div>
+        <div class="form-group">
+          <label for="desc">Desctiption</label>
+          <textarea 
+            class="form-control"
+            formControlName="desc"  cols="10" rows="10"></textarea>
+        </div>
+
+        <button type="button" class="btn btn-primary">Add Ingredient</button>
+        <b>
+        <div  formArrayName = "ingredients">
+          <div class="row" [formGroupName]="i" 
+              *ngFor="let ingred of myForm.get('ingredients').controls;let i =index;">
+                  <div class="col-xs-8">
+                      <input type="text" class="form-control"  formControlName="ingredientName"/>
+                  </div>
+                  <div class="col-xs-3">
+                      <input  type="number"  class="form-control" formControlName="ingredientAmount" />
+                  </div>
+                  <div class="col-xs-1">
+                      <button  type="button"  class="btn btn-danger">X</button>
+                  </div>
+          </div>
+        </div>
+    </div>
 </form>
