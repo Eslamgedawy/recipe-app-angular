@@ -21,15 +21,21 @@
        formControlName="desc"  cols="10" rows="10"></textarea>
   </div>
   <div class="row">
-    <div class="col-xs-8">
-       <input 
-          type="text"
-          class="form-control" />
-    </div>
-    <div class="col-xs-3">
-       <input 
-          type="number" 
-          class="form-control" />
+    <!-- formArrayName = "ingredients" -->
+    <!-- [formGroupName]="i" *ngFor="let ingred of myForm.get('ingredients').controls;let i =index;" -->
+    <div>
+        <div class="col-xs-8">
+        <input 
+              type="text"
+              class="form-control" 
+             />
+        </div>
+        <div class="col-xs-3">
+          <input 
+              type="number" 
+              class="form-control"
+              />
+        </div>
     </div>
     <div class="col-xs-1">
       <button 
