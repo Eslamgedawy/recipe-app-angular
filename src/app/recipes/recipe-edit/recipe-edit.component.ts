@@ -39,22 +39,22 @@ export class RecipeEditComponent implements OnInit {
       imagePath = recipe.imagePath;
       desc = recipe.description;
       // check if we have ingredients or not 
-      // if(recipe['ingredients']){
-      //   for(let ingredient of recipe.ingredients){
-      //     ingredients.push(
-      //       new FormGroup({
-      //         'name': new FormControl(ingredient.name),
-      //         'amount': new FormControl(ingredient.amount),
-      //       })
-      //     )
-      //   }
-      // }
+      if(recipe['ingredients']){
+        for(let ingredient of recipe.ingredients){
+          ingredients.push(
+            new FormGroup({
+              'ingredientName': new FormControl(ingredient.name),
+              'ingredientAmount': new FormControl(ingredient.amount),
+            })
+          )
+        }
+      }
     }
     this.myForm = new FormGroup({
       'name': new FormControl(recipeName),
       'imgPath': new FormControl(imagePath),
       'desc': new FormControl(desc),
-      'ingredients': new FormArray([])
+      'ingredients': ingredients
     })
   }
 
