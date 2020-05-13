@@ -1,8 +1,8 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <div class="col-xs-12">
         <div class="form-group">
-            <button type="submit"  class="btn btn-success">Save</button>
-            <button type="button" class="btn btn-danger">Cancel</button>
+            <button type="submit" [disabled]="myForm.invalid"  class="btn btn-success">Save</button>
+            <button type="button" (click)="onCancel()" class="btn btn-danger">Cancel</button>
         </div>
     </div>
 
@@ -35,10 +35,10 @@
               *ngFor="let ingred of myForm.get('ingredients').controls;let i =index;"
               style="margin-top:10px">
                   <div class="col-xs-8">
-                      <input type="text" class="form-control"  formControlName="ingredientName"/>
+                      <input type="text" class="form-control"  formControlName="name"/>
                   </div>
                   <div class="col-xs-3">
-                      <input  type="number"  class="form-control" formControlName="ingredientAmount" />
+                      <input  type="number"  class="form-control" formControlName="amount" />
                   </div>
                   <div class="col-xs-1">
                       <button  type="button"  class="btn btn-danger">X</button>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
@@ -15,7 +15,8 @@ export class RecipeEditComponent implements OnInit {
   editMode = false;
   myForm: FormGroup;
   constructor(private route: ActivatedRoute,
-              private recipeService: RecipeService) { }
+              private recipeService: RecipeService,
+              private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -44,8 +45,8 @@ export class RecipeEditComponent implements OnInit {
         for(let ingredient of recipe.ingredients){
           ingredientsArray.push(
             new FormGroup({
-              'ingredientName': new FormControl(ingredient.name,Validators.required),
-              'ingredientAmount': new FormControl(ingredient.amount,[
+              'name': new FormControl(ingredient.name,Validators.required),
+              'amount': new FormControl(ingredient.amount,[
                 Validators.required,
                 Validators.pattern("^[1-9]+[0-9]*$")
                 ]),
@@ -62,29 +63,36 @@ export class RecipeEditComponent implements OnInit {
     })
   }
 
-  onSubmit(){
+  onSubmit(){ 
     console.log(this.myForm);
-    const newRecipe = new Recipe(
-      this.myForm.value['name'],
-      this.myForm.value['description'],
-      this.myForm.value['imagePath'],
-      this.myForm.value['ingredients'],
-    )
+    // const newRecipe = new Recipe(
+    //   this.myForm.value['name'],
+    //   this.myForm.value['description'],
+    //   this.myForm.value['imagePath'],
+    //   this.myForm.value['ingredients'],
+    // )
     if(this.editMode){
-      this.recipeService.updateRecipe(this.id,newRecipe)
+      this.recipeService.updateRecipe(this.id,this.myForm.value);
     }
     else{
-      this.recipeService.addRecipe(newRecipe)
+      this.recipeService.addRecipe(this.myForm.value);
     }
+    // call onCancel method to go away to recipe-details
+    this.onCancel()
   }
+
+  onCancel(){
+      this.router.navigate(['../'],{relativeTo:this.route});
+  }
+
 
   // add ingredient form
   onAddIngredients(){
     // push form group to 
     (<FormArray>this.myForm.get('ingredients')).push(
       new FormGroup({
-        'ingredientName': new FormControl(null,Validators.required),
-        'ingredientAmount': new FormControl(null,Validators.required),
+        'name': new FormControl(null,Validators.required),
+        'amount': new FormControl(null,Validators.required),
       })
     )
   }
