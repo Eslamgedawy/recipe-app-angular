@@ -2,16 +2,19 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class RecipeService {
 
     // emmited recipeSelected
     recipeSelected = new EventEmitter<Recipe>();
+    recipesChanged = new Subject<Recipe[]>();
     
     recipes: Recipe[] = [
             new Recipe(
-               1,
+              //  1,
               'Tasty Schnitzel',
               'A super-tasty Schnitzel - just awesome!',
               'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
@@ -20,7 +23,7 @@ export class RecipeService {
                 new Ingredient('French Fries', 20)
               ]),
             new Recipe(
-               2,
+              //  2,
               'Big Fat Burger',
               'Mac Chicken Woo',
               'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
@@ -35,17 +38,28 @@ export class RecipeService {
     }
 
     // get single recipe
-     getRecipe(id: number){
-      const recipe = this.recipes.find(
-         (r) =>{
-           return r.id === id
-         }
-       )
-       return recipe;
+     getRecipe(index: number){
+       return this.recipes[index];
+      // const recipe = this.recipes.find(
+      //    (r) =>{
+      //      return r.id === id
+      //    }
+      //  )
+      //  return recipe;
      }
 
     addIngredientToShoppingList(ingredients: Ingredient[]){
         this.slService.addIngredients(ingredients);
+    }
+
+    addRecipe(recipe: Recipe){
+      this.recipes.push(recipe);
+      this.recipesChanged.next([...this.recipes]);
+    }
+
+    updateRecipe(index: number, updatedRecipe: Recipe){
+      this.recipes[index] = updatedRecipe;
+      this.recipesChanged.next([...this.recipes]);
     }
 
 }
