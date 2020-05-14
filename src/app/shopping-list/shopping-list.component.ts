@@ -28,15 +28,4 @@ export class ShoppingListComponent implements OnInit {
   onEditItem(id: number){
     this.shopServs.startEditing.next(id);
   }
-
-  // onIngredientAdded(ingredient: Ingredient) {
-  //   // this.ingredients.push(ingredient);
-  //   this.shopServs.addIngredinet(ingredient)
-  // }
-
-
-//  ingredients: Ingredient[] = [
-//     new Ingredient('Apples', 5),
-//     new Ingredient('Tomatoes', 10),
-//   ];
 }

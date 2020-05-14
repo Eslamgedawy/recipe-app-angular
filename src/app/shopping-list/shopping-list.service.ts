@@ -6,41 +6,48 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class ShoppingListService {
 
-  // ingredientChanged = new EventEmitter<Ingredient[]>();
-    ingredientChanged = new Subject<Ingredient[]>();
+  // subject to make ingredients sync
+  ingredientChanged = new Subject<Ingredient[]>();
+
+  startEditing = new Subject<number>();
+
+  // some fake ingredients
   ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 10),
   ];
-  startEditing = new Subject<number>();
-  constructor() { }
 
-
+  // get all ingredients
   getIngredients(){
     return [...this.ingredients];
   }
 
+  // get single ingredient by index
   getIngredient(index: number){
     return this.ingredients[index];
   }
 
+  // push new ingredient 
   addIngredinet(ingred: Ingredient){
     this.ingredients.push(ingred);
     // emit all ingredients 
     this.ingredientChanged.next([...this.ingredients]);
   }
 
-  editIngredient(index: number,newIngedient: Ingredient){
+  // update ingredient with the its index
+  updateIngredient(index: number,newIngedient: Ingredient){
       this.ingredients[index] = newIngedient;
       this.ingredientChanged.next([...this.ingredients]);
   }
 
+  // delete ingredient by index
   deleteIngredient(index: number){
     this.ingredients.splice(index,1);
     this.ingredientChanged.next([...this.ingredients]);
   }
 
   
+  // using spread operator to send ingredients
   addIngredients(ingredients: Ingredient[]){
     // split the array elements
     this.ingredients.push(...ingredients);

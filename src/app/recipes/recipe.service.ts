@@ -33,8 +33,14 @@ export class RecipeService {
               ])
           ];
     constructor(private slService: ShoppingListService) { }
+
     getRecipes(){
       return [...this.recipes];
+    }
+
+    // send all ingredients to shopping list using ShoppingListService
+    addIngredientToShoppingList(ingredients: Ingredient[]){
+        this.slService.addIngredients(ingredients);
     }
 
     // get single recipe
@@ -47,10 +53,6 @@ export class RecipeService {
       //  )
       //  return recipe;
      }
-
-    addIngredientToShoppingList(ingredients: Ingredient[]){
-        this.slService.addIngredients(ingredients);
-    }
 
     addRecipe(recipe: Recipe){
       this.recipes.push(recipe);

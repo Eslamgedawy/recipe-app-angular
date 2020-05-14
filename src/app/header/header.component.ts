@@ -9,18 +9,10 @@ import { Recipe } from '../recipes/recipe.model';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  @Output() featureSelected = new EventEmitter<string>();
-
-  onSelect(feature: string) {
-    this.featureSelected.emit(feature);
-  }
   constructor(private dataStorage: DataStorageService,
               private recipeService: RecipeService) { }
-
-  ngOnInit() {
-  }
 
   onSave(){
     this.dataStorage.storeRecipes().subscribe(
