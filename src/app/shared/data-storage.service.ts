@@ -27,8 +27,6 @@ export class DataStorageService {
            this.recipeService.recipes = recipes;
           //  use recipesChanged subject to sync data
            this.recipeService.recipesChanged.next([...this.recipeService.recipes])
-
-          //  this.recipeService.setRecipes(recipes)
         }
       )
   }
