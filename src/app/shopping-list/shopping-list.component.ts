@@ -11,15 +11,13 @@ import { Recipe } from '../recipes/recipe.model';
 export class ShoppingListComponent implements OnInit {
 
   ingredients: Ingredient[] = [];
-  itemSelected = new EventEmitter<number>();
   constructor(private shopServs: ShoppingListService) { }
 
   ngOnInit() {
     this.ingredients = this.shopServs.getIngredients();
-
-  // get updatd ingredients with ingredientChanged event
+    // get updatd ingredients with ingredientChanged event
     this.shopServs.ingredientChanged.subscribe(
-      (ingredients: Ingredient) => {
+      (ingredients: Ingredient[]) => {
         this.ingredients = ingredients
       }
     )
