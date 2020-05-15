@@ -60,12 +60,4 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.sub.unsubscribe()
   }
-    //  @ViewChild('nameInput',null) nameInputRef: ElementRef;
-    // @ViewChild('amountInput',null) amountInputRef: ElementRef;
-    // @Output() ingredientAdded = new EventEmitter<Ingredient>();
-
-    // const ingName = this.nameInputRef.nativeElement.value;
-    // const ingAmount = this.amountInputRef.nativeElement.value;
-    // const newIngredient = new Ingredient(ingName, ingAmount);
-    // this.ingredientAdded.emit(newIngredient);
 }
