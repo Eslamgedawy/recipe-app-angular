@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -6,10 +7,17 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ]
 })
-export class AppComponent  {
+export class AppComponent implements OnInit  {
 
    constructor(){
 
+   }
+
+   ngOnInit(){
+     firebase.initializeApp({
+           apiKey: "AIzaSyDa8L03bXERlU8emv8rjX71WLF1ClTAWD0",
+           authDomain: "recipe-app-8446e.firebaseapp.com",
+     })
    }
 
 }
