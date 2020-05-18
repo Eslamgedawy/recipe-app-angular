@@ -13,10 +13,8 @@ export class DataStorageService {
               private recipeService: RecipeService,
               private authService: AuthService) { }
 
-  // put method
-
   storeRecipes(){
-    const token = this.authService.getIdToken();
+   const token = this.authService.getIdToken();
    return this.http.put('https://recipe-app-8446e.firebaseio.com/recipes.json?auth='+token,this.recipeService.getRecipes())
   }
 
