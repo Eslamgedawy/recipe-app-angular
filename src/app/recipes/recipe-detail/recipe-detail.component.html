@@ -25,7 +25,7 @@
              style="cursor: pointer">
              Edit Recipe</a>
         </li>
-        <li *ngIf="authService.iAuth()">
+        <li *ngIf="authService.isAuth()">
           <a style="cursor: pointer" 
                (click)="onDelete()" >
                Delete Recipe</a>
