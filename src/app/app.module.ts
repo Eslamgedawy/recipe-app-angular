@@ -41,11 +41,15 @@ import { AuthGuard } from './auth/auth.guard';
        ShoppingEditComponent, 
        DropdownDirective, 
        RecipeStartComponent, 
-       RecipeEditComponent, SignupComponent, SigninComponent ],
+       RecipeEditComponent, 
+       SignupComponent, 
+       SigninComponent ],
   bootstrap:[ AppComponent ],
   providers:[
        RecipeService, 
        ShoppingListService, 
-       DataStorageService, AuthService,AuthGuard]
+       DataStorageService, 
+       AuthService,
+       AuthGuard]
 })
 export class AppModule { }

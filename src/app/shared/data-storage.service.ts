@@ -14,25 +14,15 @@ export class DataStorageService {
               private authService: AuthService) { }
 
   storeRecipes(){
+    // get the token and send it with "auth" query param
    const token = this.authService.getToken();
-   return this.http.put('https://recipe-app-8446e.firebaseio.com/recipes.json?auth='+token,this.recipeService.getRecipes())
+   return this.http.put(
+     'https://recipe-app-8446e.firebaseio.com/recipes.json?auth='+token,this.recipeService.getRecipes()
+     )
   }
 
   getRecipes(){
     const token = this.authService.getToken();
-
     return this.http.get('https://recipe-app-8446e.firebaseio.com/recipes.json?auth='+token)
-      .subscribe(
-          (response: Response) =>{
-          console.log(response.json());
-          // put my response to array of recipes
-           const recipes: Recipe[] = response.json();
-           // update my recipes with fetched recipes
-           this.recipeService.recipes = recipes;
-          //  use recipesChanged subject to sync data
-           this.recipeService.recipesChanged.next([...this.recipeService.recipes])
-        }
-      )
   }
-
 }

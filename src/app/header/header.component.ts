@@ -25,7 +25,18 @@ export class HeaderComponent {
   }
 
   onGet(){
-    this.dataStorage.getRecipes();
+    this.dataStorage.getRecipes()
+        .subscribe(
+        (response: Response) =>{
+        console.log(response.json());
+        // put my response to array of recipes
+          const recipes: Recipe[] = response.json();
+          // update my recipes with fetched recipes
+          this.recipeService.recipes = recipes;
+        //  use recipesChanged subject to sync data
+          this.recipeService.recipesChanged.next([...this.recipeService.recipes])
+      }
+    )
   }
 
   onLogout(){
